@@ -14,12 +14,15 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f4f4;
+            background-image: url("background");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: #222;
         }
 
         header {
-            background: #222;
+            background: rgba(34, 34, 34, 0.92);
             color: white;
             text-align: center;
             padding: 35px 20px;
@@ -51,7 +54,7 @@
         }
 
         .drink {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border: 2px solid #ddd;
             border-radius: 12px;
             padding: 18px;
@@ -120,7 +123,8 @@
         footer {
             text-align: center;
             padding: 30px;
-            color: #777;
+            color: white;
+            background: rgba(34, 34, 34, 0.92);
         }
 
         /* Out of Stock Popup */
@@ -438,7 +442,8 @@
         function outOfStock(drinkName) {
 
             document.getElementById("popupText").textContent =
-                drinkName + " is currently out of stock!";
+                "Sorry! " + drinkName +
+                " is out of stock. Please try again later!";
 
             document.getElementById("stockPopup").style.display =
                 "flex";
