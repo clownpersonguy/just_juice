@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Just Juice</title>
 
     <style>
@@ -21,7 +22,7 @@
             background: #222;
             color: white;
             text-align: center;
-            padding: 30px 20px;
+            padding: 35px 20px;
         }
 
         header h1 {
@@ -32,6 +33,7 @@
         header p {
             margin: 8px 0 0;
             color: #ccc;
+            font-size: 17px;
         }
 
         .menu {
@@ -40,7 +42,11 @@
             padding: 0 20px;
 
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(300px, 1fr)
+            );
+
             gap: 25px;
         }
 
@@ -49,16 +55,25 @@
             border: 2px solid #ddd;
             border-radius: 12px;
             padding: 18px;
+
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+            transition: transform 0.2s;
+        }
+
+        .drink:hover {
+            transform: translateY(-4px);
         }
 
         .drink-image {
             width: 100%;
             height: 220px;
-            background: #ddd;
-            border-radius: 8px;
+
             object-fit: cover;
+
+            border-radius: 8px;
             display: block;
+            background: #ddd;
         }
 
         .drink-info {
@@ -67,36 +82,39 @@
 
         .drink-name {
             font-size: 23px;
-            font-weight: bold;
-            margin: 0 0 5px;
+            margin: 0 0 6px;
         }
 
         .price {
             font-size: 18px;
             color: #555;
-            margin-bottom: 15px;
-        }
-
-        .buy-button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 7px;
-            background: #222;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .buy-button:hover {
-            background: #444;
+            margin-bottom: 10px;
         }
 
         .stock {
             font-size: 13px;
             color: #b00000;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+        }
+
+        .buy-button {
+            width: 100%;
+            padding: 12px;
+
+            border: none;
+            border-radius: 7px;
+
+            background: #222;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .buy-button:hover {
+            background: #444;
         }
 
         footer {
@@ -105,149 +123,335 @@
             color: #777;
         }
 
-        /* Popup */
+        /* Out of Stock Popup */
+
         .popup {
             display: none;
+
             position: fixed;
             inset: 0;
+
             background: rgba(0, 0, 0, 0.55);
+
             justify-content: center;
             align-items: center;
+
             padding: 20px;
         }
 
         .popup-box {
             background: white;
+
             padding: 30px;
+
             border-radius: 12px;
+
             text-align: center;
+
             max-width: 350px;
             width: 100%;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         .popup-box h2 {
             margin-top: 0;
         }
 
+        .popup-box p {
+            color: #555;
+        }
+
         .close-button {
             margin-top: 15px;
-            padding: 10px 20px;
+
+            padding: 10px 25px;
+
             border: none;
             border-radius: 6px;
+
             background: #222;
             color: white;
+
             cursor: pointer;
+        }
+
+        .close-button:hover {
+            background: #444;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Just Juice</h1>
-    <p>Fresh drinks. Bold flavors.</p>
-</header>
+    <header>
+        <h1>Just Juice</h1>
+        <p>Fresh drinks. Bold flavors.</p>
+    </header>
 
-<main class="menu">
 
-    <div class="drink">
-        <img class="drink-image" src="images/new-yeller.jpg" alt="New Yeller">
-        <div class="drink-info">
-            <h2 class="drink-name">New Yeller</h2>
-            <div class="price">Rp 12.000,00</div>
-            <div class="stock">Currently out of stock</div>
-            <button class="buy-button" onclick="outOfStock('New Yeller')">
-                BUY
-            </button>
+    <main class="menu">
+
+        <!-- New Yeller -->
+
+        <div class="drink">
+
+            <img
+                class="drink-image"
+                src="new-yeller"
+                alt="New Yeller"
+            >
+
+            <div class="drink-info">
+
+                <h2 class="drink-name">
+                    New Yeller
+                </h2>
+
+                <div class="price">
+                    Rp 12.000,00
+                </div>
+
+                <div class="stock">
+                    Currently out of stock
+                </div>
+
+                <button
+                    class="buy-button"
+                    onclick="outOfStock('New Yeller')"
+                >
+                    BUY
+                </button>
+
+            </div>
         </div>
-    </div>
 
-    <div class="drink">
-        <img class="drink-image" src="images/aquamarine.jpg" alt="Aquamarine">
-        <div class="drink-info">
-            <h2 class="drink-name">Aquamarine</h2>
-            <div class="price">Rp 17.000,00</div>
-            <div class="stock">Currently out of stock</div>
-            <button class="buy-button" onclick="outOfStock('Aquamarine')">
-                BUY
-            </button>
+
+        <!-- Aquamarine -->
+
+        <div class="drink">
+
+            <img
+                class="drink-image"
+                src="aquamarine"
+                alt="Aquamarine"
+            >
+
+            <div class="drink-info">
+
+                <h2 class="drink-name">
+                    Aquamarine
+                </h2>
+
+                <div class="price">
+                    Rp 17.000,00
+                </div>
+
+                <div class="stock">
+                    Currently out of stock
+                </div>
+
+                <button
+                    class="buy-button"
+                    onclick="outOfStock('Aquamarine')"
+                >
+                    BUY
+                </button>
+
+            </div>
         </div>
-    </div>
 
-    <div class="drink">
-        <img class="drink-image" src="images/deep-jungle.jpg" alt="Deep Jungle">
-        <div class="drink-info">
-            <h2 class="drink-name">Deep Jungle</h2>
-            <div class="price">Rp 15.000,00</div>
-            <div class="stock">Currently out of stock</div>
-            <button class="buy-button" onclick="outOfStock('Deep Jungle')">
-                BUY
-            </button>
+
+        <!-- Deep Jungle -->
+
+        <div class="drink">
+
+            <img
+                class="drink-image"
+                src="deep-jungle"
+                alt="Deep Jungle"
+            >
+
+            <div class="drink-info">
+
+                <h2 class="drink-name">
+                    Deep Jungle
+                </h2>
+
+                <div class="price">
+                    Rp 15.000,00
+                </div>
+
+                <div class="stock">
+                    Currently out of stock
+                </div>
+
+                <button
+                    class="buy-button"
+                    onclick="outOfStock('Deep Jungle')"
+                >
+                    BUY
+                </button>
+
+            </div>
         </div>
-    </div>
 
-    <div class="drink">
-        <img class="drink-image" src="images/crimson-reserve.jpg" alt="Crimson Reserve">
-        <div class="drink-info">
-            <h2 class="drink-name">Crimson Reserve</h2>
-            <div class="price">Rp 20.000,00</div>
-            <div class="stock">Currently out of stock</div>
-            <button class="buy-button" onclick="outOfStock('Crimson Reserve')">
-                BUY
-            </button>
+
+        <!-- Crimson Reserve -->
+
+        <div class="drink">
+
+            <img
+                class="drink-image"
+                src="crimson-reserve"
+                alt="Crimson Reserve"
+            >
+
+            <div class="drink-info">
+
+                <h2 class="drink-name">
+                    Crimson Reserve
+                </h2>
+
+                <div class="price">
+                    Rp 20.000,00
+                </div>
+
+                <div class="stock">
+                    Currently out of stock
+                </div>
+
+                <button
+                    class="buy-button"
+                    onclick="outOfStock('Crimson Reserve')"
+                >
+                    BUY
+                </button>
+
+            </div>
         </div>
-    </div>
 
-    <div class="drink">
-        <img class="drink-image" src="images/amethyst-blend.jpg" alt="Amethyst Blend">
-        <div class="drink-info">
-            <h2 class="drink-name">Amethyst Blend</h2>
-            <div class="price">Rp 12.000,00</div>
-            <div class="stock">Currently out of stock</div>
-            <button class="buy-button" onclick="outOfStock('Amethyst Blend')">
-                BUY
-            </button>
+
+        <!-- Amethyst Blend -->
+
+        <div class="drink">
+
+            <img
+                class="drink-image"
+                src="amethyst-blend"
+                alt="Amethyst Blend"
+            >
+
+            <div class="drink-info">
+
+                <h2 class="drink-name">
+                    Amethyst Blend
+                </h2>
+
+                <div class="price">
+                    Rp 12.000,00
+                </div>
+
+                <div class="stock">
+                    Currently out of stock
+                </div>
+
+                <button
+                    class="buy-button"
+                    onclick="outOfStock('Amethyst Blend')"
+                >
+                    BUY
+                </button>
+
+            </div>
         </div>
-    </div>
 
-    <div class="drink">
-        <img class="drink-image" src="images/ocherous-rush.jpg" alt="Ocherous Rush">
-        <div class="drink-info">
-            <h2 class="drink-name">Ocherous Rush</h2>
-            <div class="price">Rp 10.000,00</div>
-            <div class="stock">Currently out of stock</div>
-            <button class="buy-button" onclick="outOfStock('Ocherous Rush')">
-                BUY
-            </button>
+
+        <!-- Ocherous Rush -->
+
+        <div class="drink">
+
+            <img
+                class="drink-image"
+                src="ocherous-rush"
+                alt="Ocherous Rush"
+            >
+
+            <div class="drink-info">
+
+                <h2 class="drink-name">
+                    Ocherous Rush
+                </h2>
+
+                <div class="price">
+                    Rp 10.000,00
+                </div>
+
+                <div class="stock">
+                    Currently out of stock
+                </div>
+
+                <button
+                    class="buy-button"
+                    onclick="outOfStock('Ocherous Rush')"
+                >
+                    BUY
+                </button>
+
+            </div>
         </div>
+
+    </main>
+
+
+    <footer>
+        © 2026 Just Juice
+    </footer>
+
+
+    <!-- Out of Stock Popup -->
+
+    <div class="popup" id="stockPopup">
+
+        <div class="popup-box">
+
+            <h2>
+                Out of Stock
+            </h2>
+
+            <p id="popupText"></p>
+
+            <button
+                class="close-button"
+                onclick="closePopup()"
+            >
+                OK
+            </button>
+
+        </div>
+
     </div>
 
-</main>
 
-<footer>
-    2026 Just Juice
-</footer>
+    <script>
 
-<div class="popup" id="stockPopup">
-    <div class="popup-box">
-        <h2>Out of Stock</h2>
-        <p id="popupText"></p>
-        <button class="close-button" onclick="closePopup()">OK</button>
-    </div>
-</div>
+        function outOfStock(drinkName) {
 
-<script>
-    function outOfStock(drinkName) {
-        document.getElementById("popupText").textContent =
-            drinkName + " is currently out of stock!";
-        
-        document.getElementById("stockPopup").style.display = "flex";
-    }
+            document.getElementById("popupText").textContent =
+                drinkName + " is currently out of stock!";
 
-    function closePopup() {
-        document.getElementById("stockPopup").style.display = "none";
-    }
-</script>
+            document.getElementById("stockPopup").style.display =
+                "flex";
+        }
+
+
+        function closePopup() {
+
+            document.getElementById("stockPopup").style.display =
+                "none";
+        }
+
+    </script>
 
 </body>
 </html>
